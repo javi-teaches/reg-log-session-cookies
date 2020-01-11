@@ -25,6 +25,8 @@ function storeUser(newUserData) {
 	allUsers.push(newUserData);
 	// Volver a reescribir el users.json
 	fs.writeFileSync(userFilePath, JSON.stringify(allUsers, null, ' '));
+	// Finalmente, retornar la información del usuario nuevo
+	return newUserData;
 }
 
 function generateUserId() {
@@ -65,11 +67,17 @@ const controller = {
 		// Asignar el nombre final de la imagen
 		req.body.avatar = req.file.filename;
 
-		// Guardar al usario
-		storeUser(req.body);
+		// Guardar al usario y como la función retorna la data del usuario lo almacenamos en ela variable "user"
+		let user = storeUser(req.body);
 
-		// Redirección al login
-		res.redirect('/users/login');
+		// Setear en session el ID del usuario nuevo para auto loguearlo
+		req.session.userId = user.id;
+
+		// Setear la cookie para mantener al usuario logueado
+		res.cookie('userIdCookie', user.id, { maxAge: 60000 * 60 });
+
+		// Redirección al profile
+		return res.redirect('/users/profile');
 	},
 	login: (req, res) => {
 		const isLogged = req.session.userId ? true : false;
@@ -92,7 +100,7 @@ const controller = {
 				}
 
 				// Redireccionamos al visitante a su perfil
-				res.redirect(`/users/profile/`);
+				return res.redirect(`/users/profile/`);
 			} else {
 				res.send('Credenciales inválidas');
 			}

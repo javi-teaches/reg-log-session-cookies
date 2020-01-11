@@ -1,18 +1,18 @@
 [
  {
   "id": 1,
-  "full_name": "Pepe Sarlanga",
-  "email": "pepe@dh.com",
-  "password": "$2b$10$t1piZSWaYO8bzogXp8WHrumR6h9ARMcSkwA8YttdjS2PB5Hl0OAze",
-  "country": "Arg",
-  "avatar": "pepe_sarlanga_1578609953994.jpg"
+  "full_name": "Javi Herrera",
+  "email": "javi@dh.com",
+  "password": "$2b$10$DtuILRroUp2fAYkBhzOMk.W5kP0mKtxPx5IYX8m5CqR9Gyg7r.f36",
+  "country": "Col",
+  "avatar": "javi_herrera_1578763812685.jpg"
  },
  {
   "id": 2,
-  "full_name": "Ada Lovelace",
-  "email": "ada@dh.com",
-  "password": "$2b$10$rU7PytX0xRWjTfsZBpxCiOzpeGbTmnFIkRcDR.aFW5fxLFEhqIRCm",
-  "country": "Per",
-  "avatar": "ada_lovelace_1578615160678.jpg"
+  "full_name": "Lando Cortés",
+  "email": "lando@dh.com",
+  "password": "$2b$10$BQy8wXQ.qOa1S/S/Yp4vVutigUZBvMecqTn7gfOU.v846z1RiiwTS",
+  "country": "Arg",
+  "avatar": "lando_cortés_1578764143923.jpg"
  }
 ]
