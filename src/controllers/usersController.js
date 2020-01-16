@@ -53,9 +53,7 @@ function getUserById(id) {
 // Controller Methods
 const controller = {
 	register: (req, res) => {
-		const isLogged = req.session.userId ? true : false;
-		
-		res.render('usersRegisterForm', { isLogged });
+		res.render('usersRegisterForm');
 	},
 	store: (req, res) => {		
 		// Hash del password
@@ -74,14 +72,13 @@ const controller = {
 		req.session.userId = user.id;
 
 		// Setear la cookie para mantener al usuario logueado
-		res.cookie('userIdCookie', user.id, { maxAge: 60000 * 60 });
+		res.cookie('userCookie', user.id, { maxAge: 60000 * 60 });
 
 		// Redirección al profile
 		return res.redirect('/users/profile');
 	},
 	login: (req, res) => {
-		const isLogged = req.session.userId ? true : false;
-		res.render('usersLoginForm', { isLogged });
+		res.render('usersLoginForm');
 	},
 	processLogin: (req, res) => {
 		// Buscar usuario por email
@@ -96,7 +93,7 @@ const controller = {
 
 				// Setear la cookie
 				if (req.body.remember_user) {
-					res.cookie('userIdCookie', user.id, { maxAge: 60000 * 60 });
+					res.cookie('userCookie', user.id, { maxAge: 60000 * 60 });
 				}
 
 				// Redireccionamos al visitante a su perfil
@@ -109,16 +106,16 @@ const controller = {
 		}
 	},
 	profile: (req, res) => {
-		const isLogged = req.session.userId ? true : false;
 		let userLogged = getUserById(req.session.userId);
-		res.render('userProfile', { isLogged, userLogged });
+		res.render('userProfile', { userLogged });
 	},
 	logout: (req, res) => {
 		// Destruir la session
 		req.session.destroy();
 		// Destruir la cookie
-		res.cookie('userIdCookie', null, { maxAge: 1 });
-		return res.redirect('/');
+		res.cookie('userCookie', null, { maxAge: 1 });
+		
+		return res.redirect('/users/profile');
 	}
 };
 

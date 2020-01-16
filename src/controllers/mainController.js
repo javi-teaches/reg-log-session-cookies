@@ -20,9 +20,8 @@ function getUserById(id) {
 
 const controller = {
 	index: (req, res) => {
-		const isLogged = req.session.userId ? true : false;
 		let userLogged = getUserById(req.session.userId);
-		res.render('index', { isLogged, userLogged });
+		res.render('index', { userLogged });
 	},
 };
 
